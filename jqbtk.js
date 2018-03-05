@@ -116,7 +116,8 @@
             initCaps: false,
             placement: 'bottom',
             container:'body',
-            trigger: 'focus'
+            trigger: 'focus',
+            onchange: null,
         }, options);
         if (!settings.layout) {
             if (($(this).attr('type') === 'tel' && $(this).hasClass('keyboard-numpad')) || settings.type === 'numpad') {
@@ -155,6 +156,9 @@
                     keyboardShift = false;
             }
             parent.val(currentContent);
+            if (typeof settings.onchange == 'function') {
+                settings.onchange(currentContent);
+            }
             keyboardShiftify();
             parent.focus();
         };
